@@ -1,0 +1,28 @@
+service: hello-serverless
+frameworkVersion: '2'
+
+plugins:
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  lambdaHashingVersion: 20201221
+  region: us-east-2
+  stage: test
+
+
+functions:
+  hello:
+    handler: handler.hello
+
+  add:
+    handler: add.add
+    events:
+      - http:
+          path: math/add
+          method: post
+          cors: true
+
+
+
